@@ -1,0 +1,12 @@
+1. 问题描述：在Android中，用程序访问Sdcard时，有时出现“java.io.IOException: open failed: EACCES (Permission denied)", 这是由于没有增加sdcard对应权限而导致的。
+2. 解决办法：
+在mainfest文件中，增加以下权限：
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+问题解决。
+3. 补充：
+   1).open failed: EISDIR (Is a directory): 
+         这是由于你操作的对象是文件，但是代码中却用的是路径，把路径“……/……/”最后一个“/”去掉，或者再添加一个文件名，应该就可以了。
+   2).sdcard相关的另外一个权限：
+         <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>  
+   3).权限的位置:
+         <application ......</application>之内，有时在它之外,哪个可以用哪个。
